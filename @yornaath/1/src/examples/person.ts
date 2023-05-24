@@ -1,6 +1,6 @@
 import { chain as _ } from "lodash-es";
 import assert from 'node:assert';
-import { KeyPaths, Lens, TypePrism } from "../lens";
+import { KeyPaths, Lens, TypePrism, lens } from "../lens";
 import { Equals } from "../assert";
 
 /**
@@ -66,18 +66,8 @@ type PersonAddressZip = TypePrism<Person, "address.zip">;
 
 /**
  * Create a lens for the person object.
- * 
- * We use lodash for our naive implementation.
- * We just clone the original object and set the new value to ensure immutability.
  */
-const personLens: Lens<Person> = {
-  set: (obj, path, value) => {
-    return _(obj).cloneDeep().set(path, value).value();
-  },
-  get: (obj, path) => {
-    return _(obj).get(path).value();
-  }
-};
+const personLens: Lens<Person> = lens<Person>()
 
 /**
  * Example usage
