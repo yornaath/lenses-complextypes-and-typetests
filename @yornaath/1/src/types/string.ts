@@ -13,13 +13,27 @@ export type Split<S extends string, D extends string> =
     [T, ...Split<U, D>] : 
   [S];
 
+
+  
+
 /**
- * -------------
- * TESTS
- * -------------
+ * --------------------------
+ * TYPE TESTS
+ * --------------------------
  */
-type SplitAssert1 = AssertTrue<Equals<Split<"a.b.c", ".">, ["a", "b", "c"]>>
-type SplitAssert2 = AssertTrue<Equals<Split<"a.b.c", "">, ["a", ".", "b", ".", "c"]>>
-type SplitAssert3 = AssertTrue<Equals<Split<"a-b-c-d", "-">, ["a", "b", "c", "d"]>>
-type SplitAssert4 = AssertTrue<Equals<Split<"abcd", "">, ["a", "b", "c", "d"]>>
-type SplitAssert5 = AssertTrue<Equals<Split<"", ".">, []>>
+
+type SplitAssert1 = AssertTrue<Equals<
+  Split<"a.b.c", ".">, ["a", "b", "c"]>
+>
+type SplitAssert2 = AssertTrue<Equals<
+  Split<"a.b.c", "">, ["a", ".", "b", ".", "c"]>
+>
+type SplitAssert3 = AssertTrue<Equals<
+  Split<"a-b-c-d", "-">, ["a", "b", "c", "d"]>
+>
+type SplitAssert4 = AssertTrue<Equals<
+  Split<"abcd", "">, ["a", "b", "c", "d"]>
+>
+type SplitAssert5 = AssertTrue<Equals<
+  Split<"", ".">, []>
+>

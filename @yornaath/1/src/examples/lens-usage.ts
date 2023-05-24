@@ -1,21 +1,19 @@
-import { chain as _ } from "lodash-es";
 import assert from 'node:assert';
 import { inspect } from 'node:util';
-import type { Equals } from "../types/equals";
-import type { InferredPathType, KeyPaths } from "../types/key-paths";
 import { Lens, lens } from "../types/lens";
 
 /**
  * First we define the data we are working on.
+ * A simple profile object with nested address and email objects.
  */
 
-type Person = {
+type Profile = {
   name: string;
   age?: number;
   address: {
     street: string;
     city: string;
-    zip: number;
+    zip?: number;
     email: {
       value: string,
       flags: {
@@ -29,60 +27,58 @@ type Person = {
 
 /**
  * Example usage
- * First we create a person object
+ * First we create a Profile object
  */
-const initial: Person = {
-  name: "yornaath",
-  age: 36,
+const initial: Profile = {
+  name: "Killa",
+  age: 42,
   address: {
-    street: "yoob",
-    city: "yornaathsville",
-    zip: 1337,
+    street: "Klimov Street",
+    city: "Tarkov",
     email: {
-      value: "jorn@zeitgeist",
+      value: "killa@scavs..com",
       flags: {
         valid: false,
         confirmed: false,
       }
-      
     }
   },
 };
 
 /**
  * -------------
- * Lens example for Person
+ * Lens example for Profile
  * -------------
  */
 
 /**
- * Create a lens for the person object.
+ * Create a lens for the Profile object.
  */
-const personL: Lens<Person> = lens<Person>()
+const profileL: Lens<Profile> = lens<Profile>()
 
 /**
  * Then we can use the lens to set a new value.
  * Lenses are funtion so should not mutate the passed object but return a new one.
  */
 
-let updated = personL.set(initial, "address.zip", 12);
+let updated = profileL.set(initial, "address.zip", 12);
 
-updated = personL.set(updated, "address.email", {
-  value: "jorn@zeitgeist.pm",
+updated = profileL.set(updated, "address.email", {
+  value: "killa@scavs.com",
   flags: {
     valid: true,
     confirmed: true,
   }
 });
 
-updated = personL.set(updated, "address.email.flags.valid", true);
+updated = profileL.set(updated, "address.email.flags.valid", true);
 
-updated = personL.set(updated, "address.zip", 7777);
+updated = profileL.set(updated, "address.zip", 1337);
 
 /**
  * Age is optional so we can set it to undefined.
  */
-updated = personL.set(updated, "age", undefined);
+updated = profileL.set(updated, "age", undefined);
 
 /**
  * Assert that the original object is not mutated by setting or getting values.

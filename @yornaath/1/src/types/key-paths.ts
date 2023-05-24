@@ -38,10 +38,11 @@ export type InferredPathType<
 
 
 
+
 /**
- * -------------
- * TESTS
- * -------------
+ * --------------------------
+ * TYPE TESTS
+ * --------------------------
  */
 
 type TestType = { 
@@ -68,10 +69,24 @@ type KeyPathsAssert = AssertTrue<Equals<KeyPaths<TestType>,
 >>
 
 
-type InferredPathTypeAssert1 = AssertTrue<Equals<InferredPathType<TestType, "root">, string>>
-type InferredPathTypeAssert4 = AssertTrue<Equals<InferredPathType<TestType, "foo">, {bar: number, baz: {exhausted: {reached: true}}}>>
-type InferredPathTypeAssert5 = AssertTrue<Equals<InferredPathType<TestType, "foo.bar">, number>>
-type InferredPathTypeAssert6 = AssertTrue<Equals<InferredPathType<TestType, "foo.baz">, {exhausted: {reached: true}}>>
-type InferredPathTypeAssert7 = AssertTrue<Equals<InferredPathType<TestType, "foo.baz.exhausted">, {reached: true}>>
-type InferredPathTypeAssert8 = AssertTrue<Equals<InferredPathType<TestType, "foo.baz.exhausted.reached">, true>>
-type InferredPathTypeAssert9 = AssertTrue<Equals<InferredPathType<TestType, "foo.baz.exhausted.optional">, "Option" | undefined>>
+type InferredPathTypeAssert1 = AssertTrue<Equals<
+  InferredPathType<TestType, "root">, string>
+>
+type InferredPathTypeAssert2 = AssertTrue<Equals<
+  InferredPathType<TestType, "foo">, {bar: number, baz: {exhausted: {reached: true}}}>
+>
+type InferredPathTypeAssert3 = AssertTrue<Equals<
+  InferredPathType<TestType, "foo.bar">, number>
+>
+type InferredPathTypeAssert4 = AssertTrue<Equals<
+  InferredPathType<TestType, "foo.baz">, {exhausted: {reached: true}}>
+>
+type InferredPathTypeAssert5 = AssertTrue<Equals<
+  InferredPathType<TestType, "foo.baz.exhausted">, {reached: true}>
+>
+type InferredPathTypeAssert6 = AssertTrue<Equals<
+  InferredPathType<TestType, "foo.baz.exhausted.reached">, true>
+>
+type InferredPathTypeAssert7 = AssertTrue<Equals<
+  InferredPathType<TestType, "foo.baz.exhausted.optional">, "Option" | undefined>
+>
