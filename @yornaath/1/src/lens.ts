@@ -30,9 +30,9 @@ export type TypePrism<
   T,
   P extends KeyPaths<T> = KeyPaths<T>
 > = P extends `${infer K}.${infer R}`
-  ? K extends keyof T ? R extends keyof T[K] ? R extends KeyPaths<T[K]>
-      ? TypePrism<T[K], R>
-      : never : never : never
+    ? K extends keyof T ? R extends keyof T[K] ? R extends KeyPaths<T[K]>
+        ? TypePrism<T[K], R>
+        : never : never : never
   : P extends `${infer K}` ? K extends keyof T
     ? T[K]
     : never : never;
