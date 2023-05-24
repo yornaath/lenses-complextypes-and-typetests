@@ -12,8 +12,8 @@ import type { Split } from "./string"
 export type KeyPaths<T, K extends keyof T = keyof T> = 
   string & 
   (
-    K extends string | number
-      ? K | `${K}${T[K] extends Record<any, any> ? `.${KeyPaths<T[K]> }` : ""}`
+    K extends string | number ? 
+      K | `${K}${T[K] extends Record<any, any> ? `.${KeyPaths<T[K]> }` : ""}`
     : never
   )
 
@@ -45,7 +45,7 @@ export type InferredPathType<
  */
 
 type TestType = { 
-  root: string, 
+  root: string,
   foo: {
     bar: number, 
     baz: {
@@ -69,9 +69,9 @@ type KeyPathsAssert = AssertTrue<Equals<KeyPaths<TestType>,
 
 
 type InferredPathTypeAssert1 = AssertTrue<Equals<InferredPathType<TestType, "root">, string>>
-type InferredPathTypeAssert2 = AssertTrue<Equals<InferredPathType<TestType, "foo">, {bar: number, baz: {exhausted: {reached: true}}}>>
-type InferredPathTypeAssert3 = AssertTrue<Equals<InferredPathType<TestType, "foo.bar">, number>>
-type InferredPathTypeAssert4 = AssertTrue<Equals<InferredPathType<TestType, "foo.baz">, {exhausted: {reached: true}}>>
-type InferredPathTypeAssert5 = AssertTrue<Equals<InferredPathType<TestType, "foo.baz.exhausted">, {reached: true}>>
-type InferredPathTypeAssert6 = AssertTrue<Equals<InferredPathType<TestType, "foo.baz.exhausted.reached">, true>>
-type InferredPathTypeAssert7 = AssertTrue<Equals<InferredPathType<TestType, "foo.baz.exhausted.optional">, "Option" | undefined>>
+type InferredPathTypeAssert4 = AssertTrue<Equals<InferredPathType<TestType, "foo">, {bar: number, baz: {exhausted: {reached: true}}}>>
+type InferredPathTypeAssert5 = AssertTrue<Equals<InferredPathType<TestType, "foo.bar">, number>>
+type InferredPathTypeAssert6 = AssertTrue<Equals<InferredPathType<TestType, "foo.baz">, {exhausted: {reached: true}}>>
+type InferredPathTypeAssert7 = AssertTrue<Equals<InferredPathType<TestType, "foo.baz.exhausted">, {reached: true}>>
+type InferredPathTypeAssert8 = AssertTrue<Equals<InferredPathType<TestType, "foo.baz.exhausted.reached">, true>>
+type InferredPathTypeAssert9 = AssertTrue<Equals<InferredPathType<TestType, "foo.baz.exhausted.optional">, "Option" | undefined>>
