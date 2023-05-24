@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "main": "vite-node ./src/examples/person.ts"
+    "lenses": "vite-node ./src/examples/lens-usage.ts"
   },
   "author": "",
   "license": "ISC",
