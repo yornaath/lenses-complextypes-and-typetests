@@ -102,6 +102,7 @@ const original = {
  * Lenses are funtion so should not mutate the passed object but return a new one.
  */
 let updated = personLens.set(original, "address.zip", 12);
+
 updated = personLens.set(updated, "address.email", {
   value: "jorn@zeitgeist.pm",
   valid: true,
