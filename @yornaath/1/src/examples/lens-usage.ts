@@ -7,7 +7,7 @@ import { Lens, lens } from "../types/lens";
  * A simple profile object with nested address and email objects.
  */
 
-type Profile = {
+export type Profile = {
   name: string;
   age?: number;
   address: {
@@ -29,7 +29,7 @@ type Profile = {
  * Example usage
  * First we create a Profile object
  */
-const initial: Profile = {
+export const initial: Profile = {
   name: "Killa",
   age: 42,
   address: {
@@ -79,6 +79,11 @@ updated = profileL.set(updated, "address.zip", 1337);
  * Age is optional so we can set it to undefined.
  */
 updated = profileL.set(updated, "age", undefined);
+
+/**
+ * We can also get values from the object using the lens.
+ */
+const emailIsValid = profileL.get(updated, "address.email.flags.valid");
 
 /**
  * Assert that the original object is not mutated by setting or getting values.

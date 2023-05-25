@@ -1,4 +1,5 @@
-import { chain as _ } from "lodash-es";
+import { chain as _, set } from "lodash-es";
+import { produce } from "immer";
 import type { InferredPathType, KeyPaths } from "./key-paths";
 
 /**
@@ -18,6 +19,23 @@ export type Lens<T> = {
 export const lens = <T extends object>(): Lens<T> => ({
   set: (obj, path, value) => {
     return _(obj).cloneDeep().set(path, value).value();
+  },
+  get: (obj, path) => {
+    return _(obj).get(path).value();
+  }
+})
+
+/**
+ * Lens constructor for objects using immer.
+ * On objects with a large number of nested properties, this implementation is faster than the lodash implementation.
+ * 
+ * @note see src/examples/performance.ts for a benchmark on large objects.
+ */
+export const immerLens = <T extends object>(): Lens<T> => ({
+  set: (obj, path, value) => {
+    return produce(obj, draft => {
+      set(draft, path, value)
+    });
   },
   get: (obj, path) => {
     return _(obj).get(path).value();
