@@ -25,6 +25,7 @@ export type Split<S extends string, D extends string> =
 type SplitAssert1 = AssertTrue<Equals<
   Split<"a.b.c", ".">, ["a", "b", "c"]>
 >
+
 type SplitAssert2 = AssertTrue<Equals<
   Split<"a.b.c", "">, ["a", ".", "b", ".", "c"]>
 >
