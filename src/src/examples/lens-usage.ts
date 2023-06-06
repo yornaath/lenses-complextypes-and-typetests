@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import { inspect } from 'node:util';
-import { Lens, lens } from "../types/lens";
+import { Lens, immerLens, lens } from "../types/lens";
 
 /**
  * First we define the data we are working on.
@@ -54,14 +54,14 @@ export const initial: Profile = {
 /**
  * Create a lens for the Profile object.
  */
-const profileL: Lens<Profile> = lens<Profile>()
+const profileL: Lens<Profile> = immerLens<Profile>()
 
 /**
  * Then we can use the lens to set a new value.
  * Lenses are funtion so should not mutate the passed object but return a new one.
  */
 
-let updated = profileL.set(initial, "address.zip", 12);
+let updated = profileL.set(initial, "address.city", "Kragerø");
 
 updated = profileL.set(updated, "address.email", {
   value: "killa@scavs.com",

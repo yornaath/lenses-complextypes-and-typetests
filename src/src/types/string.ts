@@ -1,5 +1,6 @@
 import { Equals, Spec } from "./type-tests";
 
+
 /**
  * Splits a string into a tuple of strings based on a given delimiter.
  *  -> If the string is empty, it returns an empty tuple.
@@ -13,6 +14,7 @@ export type Split<S extends string, D extends string> =
     [T, ...Split<U, D>] : 
   [S];
 
+
 /**
  * Splits a string into a union of strings based on a given delimiter.
  */
@@ -23,6 +25,7 @@ export type SplitUnion<S extends string, D extends string> =
     T | SplitUnion<U, D> : 
   S;
 
+
 /**
  * --------------------------
  * TYPE TESTS
@@ -32,7 +35,7 @@ export type SplitUnion<S extends string, D extends string> =
 type SplitTests = Spec<
   [
     Equals<Split<"", ".">, []>,
-    Equals<Split<"a.b.c", ".">, ["a", "b", "c"]>,
+    Equals<Split<"a.b.c.d", ".">, ["a", "b", "c", "d"]>,
     Equals<Split<"a.b.c", "">, ["a", ".", "b", ".", "c"]>,
     Equals<Split<"a-b-c-d", "-">, ["a", "b", "c", "d"]>,
     Equals<Split<"abcd", "">, ["a", "b", "c", "d"]>,

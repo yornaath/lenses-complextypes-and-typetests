@@ -1,6 +1,7 @@
 import type { AssertTrue, Equals, Spec } from "./type-tests";
 import type { Split } from "./string";
 
+
 /**
  * Represents a union of all possible key paths within an object type.
  * A key path is a string that represents a path to a nested property in the object.
@@ -34,6 +35,7 @@ export type InferredPathType<
     : never
   : T;
 
+
 /**
  * --------------------------
  * TYPE TESTS
@@ -54,8 +56,7 @@ type TestType = {
 };
 
 type KeyPathsTest = AssertTrue<
-  Equals<
-    KeyPaths<TestType>,
+  Equals<KeyPaths<TestType>,
     | "root"
     | "foo"
     | "foo.bar"
@@ -65,10 +66,6 @@ type KeyPathsTest = AssertTrue<
     | "foo.baz.exhausted.optional"
   >
 >;
-
-type A = KeyPaths<{
-  array: ["wat"];
-}>
 
 type InferredPathTest = Spec<
   [
